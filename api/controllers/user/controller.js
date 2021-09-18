@@ -30,7 +30,7 @@ const getUserById = (req, res) => {
   }
   res.status(200).send({
     message: "Fetched successfully",
-    data: users,
+    data: user,
   });
 };
 

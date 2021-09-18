@@ -1,9 +1,13 @@
 const express = require("express");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const app = express();
 app.use(express.json());
 const userRouter = require("./api/controllers/user/router");
 
 app.use("/users", userRouter);
+app.use(morgan("tiny"));
+app.use(helmet());
 //*************************** users **************************/
 
 //get post put patch delete : use API
