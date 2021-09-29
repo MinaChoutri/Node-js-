@@ -1,11 +1,25 @@
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const cors = require("cors");
 const app = express();
 app.use(express.json());
+app.use(cors());
 const userRouter = require("./api/controllers/user/router");
+const todoRouter = require("./api/controllers/todo/router");
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost:27017/firstbase", {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
+
+const db = mongoose.connection;
+
+db.once("open", () => console.log("Database connected!!"));
 
 app.use("/users", userRouter);
+app.use("/todos", todoRouter);
 app.use(morgan("tiny"));
 app.use(helmet());
 //*************************** users **************************/
